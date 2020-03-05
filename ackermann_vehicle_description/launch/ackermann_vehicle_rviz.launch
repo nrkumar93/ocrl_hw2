@@ -26,21 +26,23 @@ limitations under the License.
 <launch>
   <arg name="namespace" default="ackermann_vehicle"/>
 
-  <include file="$(find ackermann_vehicle_description)/launch/ackermann_vehicle.launch">
-    <arg name="namespace" value="$(arg namespace)"/>
-  </include>
+<!--  <include file="$(find ackermann_vehicle_description)/launch/ackermann_vehicle.launch">-->
+<!--    <arg name="namespace" value="$(arg namespace)"/>-->
+<!--  </include>-->
 
   <!-- Read joint positions from a GUI, then publish them to joint_states. -->
   <node name="joint_state_publisher" pkg="joint_state_publisher"
         type="joint_state_publisher" ns="$(arg namespace)">
     <param name="rate" value="30"/>
     <param name="use_gui" value="true"/>
+<!--    <rosparam param="source_list">[/em_3905/joint_states]</rosparam>-->
   </node>
+
+  <node pkg="tf" type="static_transform_publisher" name="map_broadcaster" args="0 0 0 0 0 0 map odom 100" />
 
   <include file="$(find ackermann_vehicle_description)/launch/rviz.launch">
     <arg name="namespace" value="$(arg namespace)"/>
   </include>
 
-  <node pkg="tf" type="static_transform_publisher" name="map_broadcaster" args="0 0 0 0 0 0 map base_link 100" />
 
 </launch>

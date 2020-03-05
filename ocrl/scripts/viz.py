@@ -148,3 +148,4 @@ if __name__ == '__main__':
   waypoints_text_pub.publish(waypoint_text_marker)
 
   rospy.spin()
+
