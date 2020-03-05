@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<launch>
+  <arg name="namespace" default="ackermann_vehicle"/>
+
+  <include file="$(find ackermann_vehicle_gazebo)/launch/ackermann_vehicle.launch">
+    <arg name="namespace" value="$(arg namespace)"/>
+  </include>
+
+  <include file="$(find ackermann_vehicle_description)/launch/ackermann_vehicle_rviz.launch">
+    <arg name="namespace" value="$(arg namespace)"/>
+  </include>
+
+<!--    Launching all homework specific launch files -->
+  <group ns="$(arg namespace)">
+
+<!--      TF broadcaster to establish the link map->odom->base_link -->
+    <node name="tf_broadcaster" pkg="ocrl" type="tf_broadcaster.py"/>
+
+<!--      Random waypoint publisher -->
+    <node name="waypoint_publisher" pkg="ocrl" type="waypoint_publisher.py"/>
+
+<!--      Marker viz -->
+    <node name="marker_viz_node" pkg="ocrl" type="viz.py"/>
+
+  </group>
+
+
+</launch>
