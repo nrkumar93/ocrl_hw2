@@ -3,16 +3,13 @@
 import numpy as np
 
 import rospy
-from tf.transformations import quaternion_from_euler
+from tf.transformations import quaternion_from_euler, euler_from_quaternion
 from geometry_msgs.msg import Quaternion
-from geometry_msgs.msg import Point
+from geometry_msgs.msg import Point, PoseArray
 from visualization_msgs.msg import Marker
 from visualization_msgs.msg import MarkerArray
 
-x_lim = [-10, 10]
-y_lim = [-10, 10]
-theta_lim = [-np.pi, np.pi]
-num_waypoints = 10
+from .common import *
 
 # Marker dims
 text_offset = 0.5
@@ -118,14 +115,22 @@ def getWaypointsMarker(waypoints):
 
   return arrow_array, text_array
 
+def waypointCallback(msg):
+  global waypoints
+  for i in range(len(msg.poses)):
+    waypoints[i, 0] = msg.poses[i].position.x
+    waypoints[i, 1] = msg.poses[i].position.y
+    waypoints[i, 2] = euler_from_quaternion([msg.poses[i].orientation.x, msg.poses[i].orientation.y, msg.poses[i].orientation.z, msg.poses[i].orientation.w])[2]
+
 
 if __name__ == '__main__':
   rospy.init_node('marker_viz_node')
 
-  waypoints = np.random.rand(num_waypoints, 3)
-  waypoints[:, 0] = (x_lim[1] - x_lim[0]) * waypoints[:, 0] + x_lim[0]
-  waypoints[:, 1] = (y_lim[1] - y_lim[0]) * waypoints[:, 1] + y_lim[0]
-  waypoints[:, 2] = (theta_lim[1] - theta_lim[0]) * waypoints[:, 2] + theta_lim[0]
+  waypoints = np.zeros((num_waypoints, 3))
+  rospy.Subscriber("/ackermann_vehicle/waypoints",
+                   PoseArray,
+                   waypointCallback)
+  rospy.wait_for_message("/ackermann_vehicle/waypoints", PoseArray, 5)
 
   bb_pub = rospy.Publisher('bb', MarkerArray, queue_size=10)
   waypoints_arrow_pub = rospy.Publisher('waypoint_arrow', MarkerArray, queue_size=10)

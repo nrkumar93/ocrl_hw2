@@ -6,11 +6,7 @@ import rospy
 from geometry_msgs.msg import PoseArray, Pose, Quaternion
 from tf.transformations import quaternion_from_euler
 
-x_lim = [-10, 10]
-y_lim = [-10, 10]
-theta_lim = [-np.pi, np.pi]
-num_waypoints = 10
-
+from .common import *
 
 if __name__ == '__main__':
 
