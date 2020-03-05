@@ -7,6 +7,12 @@ Panels:
         - /Global Options1
         - /Status1
         - /RobotModel1
+        - /MarkerArray1
+        - /MarkerArray1/Status1
+        - /MarkerArray1/Namespaces1
+        - /MarkerArray2
+        - /MarkerArray2/Status1
+        - /MarkerArray3
       Splitter Ratio: 0.5
     Tree Height: 746
   - Class: rviz/Selection
@@ -35,7 +41,7 @@ Visualization Manager:
       Cell Size: 1
       Class: rviz/Grid
       Color: 160; 160; 164
-      Enabled: true
+      Enabled: false
       Line Style:
         Line Width: 0.0299999993
         Value: Lines
@@ -48,7 +54,7 @@ Visualization Manager:
       Plane: XY
       Plane Cell Count: 10
       Reference Frame: <Fixed Frame>
-      Value: true
+      Value: false
     - Alpha: 1
       Class: rviz/RobotModel
       Collision Enabled: false
@@ -144,6 +150,31 @@ Visualization Manager:
       Radius: 0.100000001
       Reference Frame: <Fixed Frame>
       Value: true
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /waypoint_arrow
+      Name: MarkerArray
+      Namespaces:
+        waypoint_arrow: true
+      Queue Size: 100
+      Value: true
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /waypoint_text
+      Name: MarkerArray
+      Namespaces:
+        waypoint_text: true
+      Queue Size: 100
+      Value: true
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /bb
+      Name: MarkerArray
+      Namespaces:
+        bb_ext: true
+        bb_safe: true
+      Queue Size: 100
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -178,11 +209,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Scale: 76.8996658
+      Scale: 27.1837978
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: -0.530085742
-      Y: -0.014526533
+      X: -2.06536222
+      Y: 0.380399376
     Saved: ~
 Window Geometry:
   Displays:
