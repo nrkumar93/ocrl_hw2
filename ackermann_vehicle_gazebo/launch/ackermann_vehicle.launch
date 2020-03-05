@@ -56,6 +56,7 @@ limitations under the License.
     <!-- Create the world. -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
       <arg name="world_name" value="$(arg world_name)"/>
+      <arg name="gui" value="false"/>
     </include>
 
     <!-- Spawn the vehicle. -->

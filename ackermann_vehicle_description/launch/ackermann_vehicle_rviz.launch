@@ -40,4 +40,7 @@ limitations under the License.
   <include file="$(find ackermann_vehicle_description)/launch/rviz.launch">
     <arg name="namespace" value="$(arg namespace)"/>
   </include>
+
+  <node pkg="tf" type="static_transform_publisher" name="map_broadcaster" args="0 0 0 0 0 0 map base_link 100" />
+
 </launch>
