@@ -25,8 +25,8 @@ _Note:_ If you are unfamiliar with catkin, please know that you must run `source
 ```
 roslaunch ocrl ocrl.launch
 rosrun ocrl pure_pursuit.py
-
 ```
+
 
 
 
