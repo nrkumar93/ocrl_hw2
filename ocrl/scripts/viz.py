@@ -19,7 +19,7 @@ def getBBMarker():
   marker.action = marker.ADD
   marker.scale.x = 0.2
   marker.color.a = 1.0
-  marker.color.r = 1.0
+  marker.color.r = 0.0
   marker.color.g = 1.0
   marker.color.b = 0.0
   pt1 = Point(x=x_lim[1], y=y_lim[1])
@@ -43,8 +43,8 @@ def getBBMarker():
   marker.scale.x = 0.2
   marker.color.a = 1.0
   marker.color.r = 0.0
-  marker.color.g = 1.0
-  marker.color.b = 0.0
+  marker.color.g = 0.0
+  marker.color.b = 1.0
   pt1 = Point(x=x_lim[1]+bb_offset, y=y_lim[1]+bb_offset)
   pt2 = Point(x=x_lim[0]-bb_offset, y=y_lim[1]+bb_offset)
   pt3 = Point(x=x_lim[0]-bb_offset, y=y_lim[0]-bb_offset)
@@ -95,9 +95,9 @@ def getWaypointsMarker(waypoints):
     marker.action = marker.ADD
     marker.scale.z = text_height
     marker.color.a = 1.0
-    marker.color.r = 1.0
-    marker.color.g = 1.0
-    marker.color.b = 1.0
+    marker.color.r = 0.0
+    marker.color.g = 0.0
+    marker.color.b = 0.0
     marker.pose.position.x = w[0] - text_offset
     marker.pose.position.y = w[1] - text_offset
     marker.pose.position.z = 0

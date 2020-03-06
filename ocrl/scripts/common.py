@@ -16,3 +16,6 @@ theta_lim = [-np.pi, np.pi]
 num_waypoints = 10
 waypoint_tol = 0.2
 
+wheelbase = 0.335
+max_acc = 3
+
