@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 
-from .common import *
+from common import *
 
 # Marker dims
 text_offset = 0.5

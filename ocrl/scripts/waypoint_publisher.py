@@ -6,7 +6,7 @@ import rospy
 from geometry_msgs.msg import PoseArray, Pose, Quaternion
 from tf.transformations import quaternion_from_euler
 
-from .common import *
+from common import *
 
 if __name__ == '__main__':
 

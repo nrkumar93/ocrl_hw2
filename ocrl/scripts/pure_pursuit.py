@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
-from .common import *
+from common import *
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import PoseArray, Pose
+from ackermann_msgs.msg import AckermannDriveStamped
 
 import tf
 
@@ -24,7 +25,18 @@ def vehicleStateCallback(msg):
     [rear_axle_center.orientation.x, rear_axle_center.orientation.y, rear_axle_center.orientation.z,
      rear_axle_center.orientation.w])[2]
 
+def pursuitToWaypoint(waypoint):
+  global rear_axle_center, rear_axle_theta
+  dx = waypoint[0] - rear_axle_center.position.x
+  dy = waypoint[1] - rear_axle_center.position.y
+  lookahead_dist = np.sqrt(dx*dx + dy*dy)
+  lookahead_theta = math.atan2(dy, dx)
+
+
 if __name__ == '__main__':
+
+  rospy.init_node('pure_pursuit')
+  cmd = rospy.Publisher('/ackermann_vehicle/ackermann_cmd', AckermannDriveStamped, queue_size=10)
 
   waypoints = np.zeros((num_waypoints, 3))
   rospy.Subscriber("/ackermann_vehicle/waypoints",

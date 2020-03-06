@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import numpy as np
+import math
 
 import rospy
 from tf.transformations import quaternion_from_euler, euler_from_quaternion
@@ -13,4 +14,5 @@ x_lim = [-10, 10]
 y_lim = [-10, 10]
 theta_lim = [-np.pi, np.pi]
 num_waypoints = 10
+waypoint_tol = 0.2
 
