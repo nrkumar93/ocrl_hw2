@@ -10,6 +10,8 @@ Panels:
         - /MarkerArray1
         - /MarkerArray1/Namespaces1
         - /MarkerArray2
+        - /MarkerArray2/Status1
+        - /MarkerArray2/Namespaces1
         - /MarkerArray3
       Splitter Ratio: 0.5
     Tree Height: 746
@@ -175,7 +177,7 @@ Visualization Manager:
       Value: true
   Enabled: true
   Global Options:
-    Background Color: 48; 48; 48
+    Background Color: 255; 255; 255
     Default Light: true
     Fixed Frame: map
     Frame Rate: 30
@@ -207,7 +209,7 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Scale: 27.1837978
+      Scale: 27.9082279
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
       X: -2.06536222
@@ -229,5 +231,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1920
-  X: 0
+  X: 3840
   Y: 0
