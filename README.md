@@ -47,10 +47,11 @@ The numbered red arrows are the waypoints in order to be reached by the robot. T
 _Note:_ The Gazebo is running in the non-gui mode (only gzserver is running). Enable the `gui` flag for `gazebo_ros` node in `ackermann_vehicle_gazebo/launch/ackermann_vehicle.launch` to open Gazebo gui. Functionally, this will only slow down your graphics. 
  
 
-Once the environment is ready, you can launch your planner. As an example, we have provided a pure pursuit planner/controller (below command) that drives to the set of ordered waypoints. Note that the behavior is very reactive and it does a pretty bad job in reaching all those waypoints. **You guys should be able to design a planner that does much better than this!!!**
+Once the environment is ready, you can launch your planner. As an example, we have provided a pure pursuit planner/controller (below command) that drives to the set of ordered waypoints.
 ```
 rosrun ocrl pure_pursuit.py
 ```
+Note that the behavior is very reactive and it does a pretty bad job in reaching all those waypoints. **You guys should be able to design a planner that does much better than this!!!**
 
 ### Documentation
 - `ocrl/scripts/waypoint_publisher.py` generates 10 random waypoints within the boundary and publishes to the topic  `/ackermann_vehicle/waypoints` of type `geometry_msgs/PoseArray`.
