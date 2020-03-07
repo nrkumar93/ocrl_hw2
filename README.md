@@ -39,8 +39,11 @@ Run the following launch file to invoke the simulator, visualization and ordered
 roslaunch ocrl ocrl.launch
 ```
 Running the above command should open the following RViz window with a set of randomly chosen waypoints
-![Sample task](img/env_rviz_layout.png)
+![](ocrl/img/env_rviz_layout.png)
+The numbered red arrows are the waypoints in order to be reached by the robot. The green boundary denotes the limits of X and Y axis from which a waypoint might be chosen, the robot can go out of this boundary to reach a waypoint. The blue boundary is the hard boundary beyond which the robot should not go. 
 
+_Note:_ The Gazebo is running in the non-gui mode (only gzserver is running). Enable the `gui` flag for `gazebo_ros` node in `ackermann_vehicle_gazebo/launch/ackermann_vehicle.launch` to open Gazebo gui. Functionally, this will only slow down your graphics. 
+ 
 
 Once the environment is ready, you can launch your planner. As an example, we have provided a pure pursuit planner/controller (below command) that drives to the set of ordered waypoints. Note that the behavior is very reactive and it does a pretty bad job in reaching all those waypoints. **You guys should be able to design a planner that does much better than this!!!**
 ```
@@ -48,15 +51,30 @@ rosrun ocrl pure_pursuit.py
 ```
 
 ### Question
+Generate a local policy that drives an Ackermann system to a sequence of waypoints `(x, y, theta)` in the shortest time possible while respecting the dynamics (non-holonomic) and control saturation (velocity, acceleration and steering angle limits).
+
+The robot model that has been provided to you can be modeled with bicycle dynamics. If the 
 
 
+#### Parameters
+Wheelbase = 0.335m
+Turning radius = 0.7m
+Max acceleration = 4m/s^2
+Max deceleration = -4m/s^2
+Max waypoints = 10
+Waypoint satisfy tolerance = 0.2m
 
-
+#### Integration 
+- Subscribe to the list of waypoints published in topic `/ackermann_vehicle/waypoints` of type `geometry_msgs/PoseArray`. You can check `ocrl/scripts/pure_pursuit.py` for an example of subscribing to the Waypoints
+- Publish your trajectory in the form of Ackermann command to `/ackermann_vehicle/ackermann_cmd` of type `ackermann_msgs/AckermannDriveStamped`. 
 
 ### What to turn in?
 
-You can use C++/Python/Matlab for this assignment. You have . You should use Matlab graphics to draw pictures of your robot and the obstacles, that allows rotation of the picture so it can be viewed from any angle (modify inverse kinematics class examples and use plot3()). You can work in groups or alone. Generate a web page describing what you did (one per group). Include links to your source and any compiled code in either .zip, .tar, or .tar.gz format. Be sure to list the names of all the members of your group. Mail the URL of your web page to cga@cmu.edu and Ramkumar Natarajan rnataraj@cs.cmu.edu. The writeup is more important than the code. What did you do? Why did it work? What didn't work and why?
+You can use C++/Python/Matlab for this assignment. You will have to stick to the API conventions provided in the **Integration** section. If you prefer to use a different API, then make sure you bundle them all up to a single launch file and provide instructions so that I can test it seamlessly. You can work in groups of size upto 5 (please prefer working in groups and make sure to have at least one person per team with a working knowledge of ROS). 
 
+Submit a writeup explaining your method both technically and at a high-level that explains the reason for choosing any particular strategy. Include links to your source and any compiled code in either .zip, .tar, or .tar.gz format. The writeup is more important than the code. What did you do? Why did it work? What didn't work and why? Be sure to list the names of all the members of your group in the writeup.
+
+Please submit the writeup and code via Gradescope. 
 
 
 
