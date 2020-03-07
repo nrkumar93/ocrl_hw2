@@ -1,6 +1,6 @@
 16-745 Optimal Control and Reinformcement Learning : Homework 2 
 ==================================================
-# Due: March 27th
+## Due: March 27th
 
 The goal of the assignment is to generate a local policy that drives an Ackermann system to a sequence of waypoints `(x, y, theta)` in the shortest time possible while respecting the dynamics (non-holonomic) and control saturation (velocity, acceleration and steering angle limits). The homework is open-ended and there is no restriction on the type of Optimal Control/RL/Planning/Learning methods you can use to achieve this task. 
 
