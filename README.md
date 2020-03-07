@@ -51,6 +51,13 @@ Once the environment is ready, you can launch your planner. As an example, we ha
 rosrun ocrl pure_pursuit.py
 ```
 
+### Documentation
+- `ocrl/scripts/waypoint_publisher.py` generates 10 random waypoints within the boundary and publishes to the topic  `/ackermann_vehicle/waypoints` of type `geometry_msgs/PoseArray`.
+- `ocrl/scripts/viz.py` is a RViz plugin to visualize the XY boundaries and the waypoints.
+- `ocrl/scripts/tf_broadcaster.py` is TF broadcaster to synchronize Gazebo and RViz 
+- `ocrl/scripts/pure_pursuit.py` is a example dummy planner to get an idea
+- `ackermann_vehicle_gazebo/nodes/ackermann_controller.py` is the Ackermann controller node that performs low level control and convert the command coming from your planner to drive the wheels of Ackermann steering. **You will essentially be integrating your planner with this node by publishing Ackermann commands to `/ackermann_vehicle/ackermann_cmd` topic of type `ackermann_msgs/AckermannDriveStamped` **
+
 ### Question
 Generate a local policy that drives an Ackermann system to a sequence of waypoints `(x, y, theta)` in the shortest time possible while respecting the dynamics (non-holonomic) and control saturation (velocity, acceleration and steering angle limits).
 
@@ -82,7 +89,7 @@ Submit a writeup explaining your method both technically and at a high-level tha
 
 Please submit the writeup and code via Gradescope. 
 
-
+Good Luck!
 
 
 
