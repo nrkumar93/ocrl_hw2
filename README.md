@@ -1,9 +1,10 @@
+## ALERT: Latest stable update @ Mar 7th 5:25pm
+Direct all the issues to Piazza. Before you raise an issue, make sure you cloned/forked after the latest stable update.
+
+
 16-745 Optimal Control and Reinformcement Learning : Homework 2 
 ==================================================
 ## Due: March 27th
-
-## ALERT: Latest stable update @ Mar 7th 5:25pm
-Direct all the issues to Piazza. Before you raise an issue, make sure you cloned/forked after the latest stable update.
 
 The goal of the assignment is to generate a local policy that drives an Ackermann system to a sequence of waypoints `(x, y, theta)` in the shortest time possible while respecting the dynamics (non-holonomic) and control saturation (velocity, acceleration and steering angle limits). The homework is open-ended and there is no restriction on the type of Optimal Control/RL/Planning/Learning methods you can use to achieve this task. 
 
