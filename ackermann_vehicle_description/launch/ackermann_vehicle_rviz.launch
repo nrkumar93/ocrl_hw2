@@ -34,7 +34,7 @@ limitations under the License.
   <node name="joint_state_publisher" pkg="joint_state_publisher"
         type="joint_state_publisher" ns="$(arg namespace)">
     <param name="rate" value="30"/>
-    <param name="use_gui" value="true"/>
+<!--    <param name="use_gui" value="true"/>-->
 <!--    <rosparam param="source_list">[/em_3905/joint_states]</rosparam>-->
   </node>
 
