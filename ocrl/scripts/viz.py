@@ -118,12 +118,14 @@ def waypointCallback(msg):
 if __name__ == '__main__':
   rospy.init_node('marker_viz_node')
 
+  # Subscribe to the randomly generated waypoints
   waypoints = np.zeros((num_waypoints, 3))
   rospy.Subscriber("/ackermann_vehicle/waypoints",
                    PoseArray,
                    waypointCallback)
   rospy.wait_for_message("/ackermann_vehicle/waypoints", PoseArray, 5)
 
+  # Viz marker publishers
   bb_pub = rospy.Publisher('bb', MarkerArray, queue_size=10)
   waypoints_arrow_pub = rospy.Publisher('waypoint_arrow', MarkerArray, queue_size=10)
   waypoints_text_pub = rospy.Publisher('waypoint_text', MarkerArray, queue_size=10)
@@ -131,15 +133,18 @@ if __name__ == '__main__':
   bb_marker = getBBMarker()
   waypoint_arrow_marker, waypoint_text_marker = getWaypointsMarker(waypoints)
 
+  # Publish bounding boxes
   r = rospy.Rate(10)  # 10hz
   while bb_pub.get_num_connections() == 0:
     r.sleep()
   bb_pub.publish(bb_marker)
 
+  # Publish waypoint poses using arrow
   while waypoints_arrow_pub.get_num_connections() == 0:
     r.sleep()
   waypoints_arrow_pub.publish(waypoint_arrow_marker)
 
+  # Publish waypoint ids in the order to be followed
   while waypoints_text_pub.get_num_connections() == 0:
     r.sleep()
   waypoints_text_pub.publish(waypoint_text_marker)
