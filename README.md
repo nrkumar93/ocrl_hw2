@@ -1,5 +1,5 @@
 ## ALERT: Latest stable update @ Mar 7th 5:25pm
-Direct all the issues to Piazza. Before you raise an issue, make sure you cloned/forked after the latest stable update.
+Direct all the issues to Piazza. Before you raise an issue, **make sure you cloned/forked after the latest stable update.**
 
 
 16-745 Optimal Control and Reinformcement Learning : Homework 2 
