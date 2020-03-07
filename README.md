@@ -41,7 +41,7 @@ roslaunch ocrl ocrl.launch
 ```
 Running the above command should open the following RViz window with a set of randomly chosen waypoints
 ![](ocrl/img/env_rviz_layout.png)
-The numbered red arrows are the waypoints in order to be reached by the robot. The green boundary denotes the limits of X and Y axis from which a waypoint might be chosen, the robot can go out of this boundary to reach a waypoint. The blue boundary is the hard boundary beyond which the robot should not go. 
+The numbered red arrows are the waypoints in order to be reached by the robot. The green boundary denotes the limits of X (from -10 to 10 in meters) and Y axis (from -10 to 10 in meters) from which a waypoint might be chosen, the robot can go out of this boundary to reach a waypoint. The blue boundary is the harder boundary beyond which the robot is expected to not go. 
 
 _Note:_ The Gazebo is running in the non-gui mode (only gzserver is running). Enable the `gui` flag for `gazebo_ros` node in `ackermann_vehicle_gazebo/launch/ackermann_vehicle.launch` to open Gazebo gui. Functionally, this will only slow down your graphics. 
  
@@ -54,20 +54,25 @@ rosrun ocrl pure_pursuit.py
 ### Question
 Generate a local policy that drives an Ackermann system to a sequence of waypoints `(x, y, theta)` in the shortest time possible while respecting the dynamics (non-holonomic) and control saturation (velocity, acceleration and steering angle limits).
 
-The robot model that has been provided to you can be modeled with bicycle dynamics. If the 
-
+Our robot can be modeled with bicycle dynamics. The two control signals are the steering wheel angle
+and the linear acceleration with respect to the base link. A few parameters you might need for designing the planner are listed below
 
 #### Parameters
 - Wheelbase = 0.335m
-- Turning radius = 0.7m
+- Min turning radius = 0.67m
+- Max steering angle = 30 deg
 - Max acceleration = 4m/s^2
 - Max deceleration = -4m/s^2
 - Max waypoints = 10
-- Waypoint satisfy tolerance = 0.2m
+- Waypoint tol = 0.2m
+- Waypoint ang tol = 5 deg
+
+`Wheelbase` is the distance between the centers of the front and rear wheels. `Min turning radius` is calculated using the wheelbase and the maximum turn angle of the front wheel (or the `max steering angle`). `Waypoint tol` is the radius around a waypoint into which the vehicle should enter with a heading error of +/-`Waypoint ang tol` to be considered as reaching a waypoint. 
 
 #### Integration 
-- Subscribe to the list of waypoints published in topic `/ackermann_vehicle/waypoints` of type `geometry_msgs/PoseArray`. You can check `ocrl/scripts/pure_pursuit.py` for an example of subscribing to the Waypoints
-- Publish your trajectory in the form of Ackermann command to `/ackermann_vehicle/ackermann_cmd` of type `ackermann_msgs/AckermannDriveStamped`. 
+* Subscribe to the list of waypoints from the topic `/ackermann_vehicle/waypoints` of type `geometry_msgs/PoseArray`. You can check `ocrl/scripts/pure_pursuit.py` for an example of subscribing to the waypoints
+* Publish your trajectory in the form of Ackermann command to `/ackermann_vehicle/ackermann_cmd` topic of type `ackermann_msgs/AckermannDriveStamped`. 
+    * For visualization, you can control the car using the velocity with respect to the base link and the steerimg angle. This means you just have to publish the `drive.speed` and `drive.steering_angle` fields of `/ackermann_vehicle/waypoints` topic to visualize the robot. Note that you might be planning in the space of control inputs (acceleration with respect to the base link) and you need to convert that to velocity for visualization. 
 
 ### What to turn in?
 
