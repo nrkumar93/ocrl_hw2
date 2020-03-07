@@ -19,10 +19,11 @@ The following ROS packages might need to be installed.
 ```
 effort_controllers
 joint_state_publisher
+ackermann_msgs
 ``` 
 The above ROS packages can be installed with the below command
 ```
-sudo apt-get install ros-<ros_distro_name>-<package_name>
+sudo apt-get install ros-<ros_distro_name>-<package_name with '_' replaced with '-'>
 ```
 In case any other ROS packages are missing use the above command to install it. 
 
@@ -57,12 +58,12 @@ The robot model that has been provided to you can be modeled with bicycle dynami
 
 
 #### Parameters
-Wheelbase = 0.335m
-Turning radius = 0.7m
-Max acceleration = 4m/s^2
-Max deceleration = -4m/s^2
-Max waypoints = 10
-Waypoint satisfy tolerance = 0.2m
+- Wheelbase = 0.335m
+- Turning radius = 0.7m
+- Max acceleration = 4m/s^2
+- Max deceleration = -4m/s^2
+- Max waypoints = 10
+- Waypoint satisfy tolerance = 0.2m
 
 #### Integration 
 - Subscribe to the list of waypoints published in topic `/ackermann_vehicle/waypoints` of type `geometry_msgs/PoseArray`. You can check `ocrl/scripts/pure_pursuit.py` for an example of subscribing to the Waypoints
