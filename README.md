@@ -55,7 +55,9 @@ Once the environment is ready, you can launch your planner. As an example, we ha
 ```
 rosrun ocrl pure_pursuit.py
 ```
-Note that the behavior is very reactive and it does a pretty bad job in reaching all those waypoints. **You guys should be able to design a planner that does much better than this!!!**
+As you can see, `pure pursuit` is an extremely simple and naive mechanism that drives the car with a constant velocity of 1m/s, does not satisfy the heading constraint at the waypoints (you guys should satisfy heading constraint too) and does not perform any reverse manuever. 
+
+Also note that the behavior is very reactive and it does a pretty bad job in reaching all those waypoints. **You guys should be able to design a planner that does much better than this!!!**
 
 ### Documentation
 - `ocrl/scripts/waypoint_publisher.py` generates 10 random waypoints within the boundary and publishes to the topic  `/ackermann_vehicle/waypoints` of type `geometry_msgs/PoseArray`.
@@ -74,6 +76,7 @@ and the linear acceleration with respect to the base link. A few parameters you 
 - Wheelbase = 0.335m
 - Min turning radius = 0.67m
 - Max steering angle = 30 deg
+- Max velocity = 10m/s
 - Max acceleration = 4m/s^2
 - Max deceleration = -4m/s^2
 - Max waypoints = 10
