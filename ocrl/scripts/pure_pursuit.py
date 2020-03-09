@@ -31,13 +31,9 @@ def vehicleStateCallback(msg):
 def pursuitToWaypoint(waypoint):
   print waypoint
   global rear_axle_center, rear_axle_theta, rear_axle_velocity, cmd_pub
+  rospy.wait_for_message("/ackermann_vehicle/ground_truth/state", Odometry, 5)
   dx = waypoint[0] - rear_axle_center.position.x
   dy = waypoint[1] - rear_axle_center.position.y
-  # beta = shortest_angular_distance(waypoint[2], rear_axle_theta)
-  # lookahead_dist = np.sqrt(dx*dx + dy*dy)
-  # lookahead_theta = math.atan2(dy, dx)
-  # alpha = shortest_angular_distance(waypoint[2], lookahead_theta)
-  # # target_distance = math.sqrt(dx*dx + dy*dy + beta*beta)
   target_distance = math.sqrt(dx*dx + dy*dy)
 
   cmd = AckermannDriveStamped()
@@ -51,24 +47,21 @@ def pursuitToWaypoint(waypoint):
     dy = waypoint[1] - rear_axle_center.position.y
     lookahead_dist = np.sqrt(dx * dx + dy * dy)
     lookahead_theta = math.atan2(dy, dx)
-    alpha = shortest_angular_distance(waypoint[2], lookahead_theta)
+    alpha = shortest_angular_distance(rear_axle_theta, lookahead_theta)
 
     cmd.header.stamp = rospy.Time.now()
     cmd.header.frame_id = "base_link"
-    # cmd.drive.speed = rear_axle_velocity.linear.x
+    # Publishing constant speed of 1m/s
     cmd.drive.speed = 1
-    # cmd.drive.acceleration = -2
-    # cmd.drive.acceleration = max_acc
-    # if abs(rear_axle_velocity.linear.x) < 5:
-    #   R = lookahead_dist / math.sin(alpha) * 0.5
-    #   cmd.drive.steering_angle = math.atan(2.0*wheelbase*math.sin(alpha)/lookahead_dist)
-    # else:
-    #   cmd.drive.steering_angle += alpha
-    cmd.drive.steering_angle = math.atan(2.0*wheelbase*math.sin(alpha)/lookahead_dist)
-    # cmd.drive.steering_angle += alpha
 
-    # beta = shortest_angular_distance(waypoint[2], rear_axle_theta)
-    # target_distance = math.sqrt(dx * dx + dy * dy + beta * beta)
+    # Reactive steering
+    if alpha < 0:
+      st_ang = max(-max_steering_angle, alpha)
+    else:
+      st_ang = min(max_steering_angle, alpha)
+
+    cmd.drive.steering_angle = st_ang
+
     target_distance = math.sqrt(dx * dx + dy * dy)
 
     cmd_pub.publish(cmd)

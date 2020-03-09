@@ -18,4 +18,4 @@ waypoint_tol = 0.2
 
 wheelbase = 0.335
 max_acc = 3
-
+max_steering_angle = 0.5
