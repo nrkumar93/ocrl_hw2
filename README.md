@@ -45,7 +45,7 @@ Run the following launch file to invoke the simulator, visualization and ordered
 roslaunch ocrl ocrl.launch
 ```
 Running the above command should open the following RViz window with a set of randomly chosen waypoints
-![](ocrl/img/env_rviz_layout.png)
+![](ocrl/img/env_angled.png)
 The numbered red arrows are the waypoints in order to be reached by the robot. The green boundary denotes the limits of X (from -10 to 10 in meters) and Y axis (from -10 to 10 in meters) from which a waypoint might be chosen, the robot can go out of this boundary to reach a waypoint. The blue boundary is the harder boundary beyond which the robot is expected to not go. 
 
 _Note:_ The Gazebo is running in the non-gui mode (only gzserver is running). Enable the `gui` flag for `gazebo_ros` node in `ackermann_vehicle_gazebo/launch/ackermann_vehicle.launch` to open Gazebo gui. Functionally, this will only slow down your graphics. 
