@@ -1,4 +1,4 @@
-## ALERT: Latest stable update @ Mar 8th 8:00pm
+## ALERT: Latest stable update @ Mar 9th 11:30pm
 Direct all the issues to Piazza. Before you raise an issue, **make sure you cloned/forked after the latest stable update.**
 
 
